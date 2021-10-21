@@ -1,4 +1,4 @@
-# terminize
+# Ansi
 ANSI Terminal Functions
 
 
@@ -6,8 +6,11 @@ ANSI Terminal Functions
 
 ```
 c = Ansi()
+```
 
-#move cursor pos
+## Move Cursor
+
+```
 c.up(<num of lines. default 1>)
 c.down(<num of lines. default 1>)
 c.left(<num of lines. default 1>)
@@ -20,8 +23,11 @@ c.goto(<row>, <col>)
 
 c.pg_up(<num of rows. default 0>)
 c.pg_down(<num of cols. default 0>)
+```
 
-#clear screen
+## Clear Screen
+
+```
 c.clear()
 
 #clear end of line
@@ -33,21 +39,32 @@ c.clearbol()
 #clear col to the end
 c.clearln(<num of cols to end. default 2>)
 
-# show/hide cursor
+```
 
+## Show/Hide Cursor
+
+```
 c.show()
 c.hide()
+```
 
-#save/resore cursor pos
+## Save/Resore Cursor POS
+
+```
 c.save()
 c.restore()
+```
 
-#basic color
+## Basic Color
+
+```
 c.color(<color number>)
 c.style(<style number>)
 c.background(<color number>)
+```
 
-# reset screen
+## Reset Screen
+  
+```
 c.reset()
-
 ```
