@@ -12,10 +12,6 @@ class Term:
 
     esc = "\033["
 
-    def __init__(self):
-        """Init"""
-        pass
-
     def _wrap(self, attr="", end=""):
         """Wrap with ANSI codes"""
         sys.stdout.write(f"{self.esc}{attr}{end}")
@@ -54,6 +50,10 @@ class Term:
         """Cursor to Screen Pos"""
         self._wrap(f"{row};{col}", "H")
 
+    def home(self):
+        """Place cursor at the top left"""
+        self._wrap("[", "f")
+
     def row(self, row=0):
         """Cursor to Vertical Pos"""
         self._wrap(row, "f")
@@ -82,17 +82,25 @@ class Term:
         self._wrap(num, "m")
 
     # Clear
-    def erase(self):
+    def clear(self):
         """Clear Screen"""
         self._wrap("2","J")
 
-    def eraseln(self, num=0):
+    def cleareol(self):
+        """Clear Line"""
+        self._wrap(0, "K")
+
+    def clearbol(self):
+        """Clear Line"""
+        self._wrap(2, "K")
+
+    def clearln(self, num=2):
         """Clear Line"""
         self._wrap(num, "K")
 
     def reset(self):
         """Reset Term"""
-        self._wrap("", "c")
+        sys.stdout.write("\033c \033(B \033[0m \033[J \033[?25h");
 
     #Cursor Vis
     def hide(self):
