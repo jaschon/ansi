@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""ANSI Terminal Commandline"""
+"""ANSI Terminal Editor Example"""
 
 __author__ = "Jason Rebuck"
 __copyright__ = "2021"
-__version__ = "0.10"
+__version__ = "0.05"
 
 import sys, tty
-from term import Term
+from ansi.ansi import Ansi
 
 
 class Editor:
@@ -18,7 +18,7 @@ class Editor:
             127 : 'delete_key', #press delete
             'default' : 'default_key', #65-90 = A-Z, 97-122 = a-z
 
-            #left
+            #arrow keys
             27 : 'check_next', #check next for left, right keys
             "27-91" : 'check_next', #check next for arrows
             "27-91-68" : 'left_key',
@@ -27,8 +27,8 @@ class Editor:
 
 
     def __init__(self):
-        self.set_raw()
-        self.term = Term()
+        self.set_tty()
+        self.ansi = Ansi()
 
     #Setup
     def clear_var(self):
@@ -37,9 +37,13 @@ class Editor:
         self.text = ""
         self.char = ""
 
-    def set_raw(self):
+    def set_tty(self):
         """Set tty to raw mode"""
         tty.setraw(sys.stdin)
+
+    def return_tty(self):
+        """Return from raw mode"""
+        tty.setcbreak(sys.stdin)
 
     #IO Functions
     def flush_buffer(self):
@@ -56,10 +60,10 @@ class Editor:
 
     def write_output(self):
         """Set cursor and output"""
-        self.term.right(1000)
-        self.term.cleareol()
+        self.ansi.right(1000)
+        self.ansi.cleareol()
         self.write_text(self.check_syntax())
-        self.term.right(1000)
+        self.ansi.right(1000)
         self.check_advance_cursor()
         self.flush_buffer()
 
@@ -67,7 +71,7 @@ class Editor:
     def check_advance_cursor(self):
         """Advance the cursor"""
         if self.index > 0:
-            self.term.left(self.index)
+            self.ansi.left(self.index)
 
     def check_syntax(self):
         """Syntax Highlight...TO DO"""
@@ -89,6 +93,8 @@ class Editor:
     #Keyboard press methods...
     def quit_key(self):
         """Quit!"""
+        self.return_tty()
+        self.ansi.reset()
         sys.exit()
 
     def default_key(self):
@@ -107,8 +113,8 @@ class Editor:
 
     def enter_key(self):
         """Enter Key Press"""
-        self.term.next()
-        self.term.right(1000)
+        self.ansi.next()
+        self.ansi.right(1000)
         self.clear_var()
 
     def left_key(self):
@@ -125,14 +131,15 @@ class Editor:
         while True:
             char = self.read_char()
             if char == 3: 
-                break
+                self.quit_key()
             self.write_text(f"{str(char)} = '{chr(char)}'")
             self.flush_buffer()
             self.enter_key()
 
     def run(self):
         """Main Loop"""
-        self.term.clear()
+        self.ansi.clear()
+        self.ansi.goto(0,0)
         while True: #each line loop
             self.clear_var() #clear input vars
             while True: #loop for each char

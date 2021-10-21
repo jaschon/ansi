@@ -7,14 +7,14 @@ __version__ = "0.10"
 
 import sys
 
-class Term:
+class Ansi:
     """ANSI Terminal Functions"""
 
-    esc = "\033["
+    esc = "\x1b"
 
-    def _wrap(self, attr="", end=""):
+    def _wrap(self, attr="", end="", bracket="["):
         """Wrap with ANSI codes"""
-        sys.stdout.write(f"{self.esc}{attr}{end}")
+        sys.stdout.write(f"{self.esc}{bracket}{attr}{end}")
         sys.stdout.flush()
 
     #Cursor Pos
@@ -73,7 +73,7 @@ class Term:
         """Start Color Code"""
         self._wrap(f"3{num}", "m")
 
-    def bg(self, num=0):
+    def background(self, num=0):
         """Start Background Code"""
         self._wrap(f"4{num}", "m")
 
@@ -100,7 +100,11 @@ class Term:
 
     def reset(self):
         """Reset Term"""
-        sys.stdout.write("\033c \033(B \033[0m \033[J \033[?25h");
+        self._wrap("", "c", bracket="")
+        self._wrap("", "B", bracket="(")
+        self._wrap(0, "m")
+        self.clear()
+        self.show()
 
     #Cursor Vis
     def hide(self):

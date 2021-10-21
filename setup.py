@@ -2,18 +2,18 @@
 
 import os
 from setuptools import setup
-from terminize import terminize
+from ansi import ansi
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "Terminizer",
-    version = terminize.__version__,
-    author = terminize.__author__,
-    description = (terminize.__doc__),
-    keywords = "Escape Codes, ANSI",
-    url = "https://github.com/jaschon/terminize",
-    packages=['terminize', 'tests'],
+    name = "Ansi",
+    version = ansi.__version__,
+    author = ansi.__author__,
+    description = (ansi.__doc__),
+    keywords = "ANSI, Terminal, Escape Codes, Color",
+    url = "https://github.com/jaschon/ansi",
+    packages=['ansi', 'tests'],
     long_description=read('README.md'),
 )
