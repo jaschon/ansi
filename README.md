@@ -2,13 +2,13 @@
 ANSI Terminal Functions
 
 
-## Example
+## Examples
 
 ```
 c = Ansi()
 ```
 
-## Move Cursor
+### Move Cursor
 
 ```
 c.up(<num of lines. default 1>)
@@ -25,7 +25,7 @@ c.pg_up(<num of rows. default 0>)
 c.pg_down(<num of cols. default 0>)
 ```
 
-## Clear Screen
+### Clear Screen
 
 ```
 c.clear()
@@ -41,21 +41,21 @@ c.clearln(<num of cols to end. default 2>)
 
 ```
 
-## Show/Hide Cursor
+### Show/Hide Cursor
 
 ```
 c.show()
 c.hide()
 ```
 
-## Save/Resore Cursor POS
+### Save/Resore Cursor POS
 
 ```
 c.save()
 c.restore()
 ```
 
-## Basic Color
+### Basic Color
 
 ```
 c.color(<color number>)
@@ -63,7 +63,7 @@ c.style(<style number>)
 c.background(<color number>)
 ```
 
-## Reset Screen
+### Reset Screen
   
 ```
 c.reset()
