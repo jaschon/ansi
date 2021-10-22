@@ -6,7 +6,10 @@ __copyright__ = "2021"
 __version__ = "0.05"
 
 import sys, tty
-from ansi import Ansi
+try:
+    from ansi import Ansi
+except ImportError:
+    from ansi.ansi import Ansi
 
 
 class Editor:

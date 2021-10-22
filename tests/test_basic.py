@@ -3,7 +3,10 @@
 
 import sys
 import unittest
-from ansi.ansi import Ansi
+try:
+    from ansi import Ansi
+except ImportError:
+    from ansi.ansi import Ansi
 
 class AnsiTest(Ansi):
     """Ansi Class for Testing"""
