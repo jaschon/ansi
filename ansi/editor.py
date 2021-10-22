@@ -6,7 +6,7 @@ __copyright__ = "2021"
 __version__ = "0.05"
 
 import sys, tty
-from ansi.ansi import Ansi
+from ansi import Ansi
 
 
 class Editor:
@@ -17,10 +17,21 @@ class Editor:
             13 : 'enter_key', #press enter
             127 : 'delete_key', #press delete
             'default' : 'default_key', #65-90 = A-Z, 97-122 = a-z
+            49 : 'color_key',
+            50 : 'color_key',
+            51 : 'color_key',
+            52 : 'color_key',
+            53 : 'color_key',
+            54 : 'color_key',
+            55 : 'color_key',
+            56 : 'color_key',
+
 
             #arrow keys
             27 : 'check_next', #check next for left, right keys
             "27-91" : 'check_next', #check next for arrows
+            "27-91-65" : 'up_key',
+            "27-91-66" : 'down_key',
             "27-91-68" : 'left_key',
             "27-91-67" : 'right_key',
     }
@@ -101,6 +112,9 @@ class Editor:
         if 32 <= self.char <= 126:
             self.char_key()
 
+    def color_key(self):
+        self.ansi.color(50-self.char)
+
     def char_key(self):
         """Alpha Keyboard Press"""
         self.text = f"{self.text[:self.index]}{chr(self.char)}{self.text[self.index:]}" 
@@ -125,8 +139,16 @@ class Editor:
         """Right Key Press"""
         self.index = min(len(self.text), self.index + 1)
 
+    def up_key(self):
+        """Up Key Press"""
+        pass
+
+    def down_key(self):
+        """Up Key Press"""
+        pass
+
     # Loop Modes
-    def key_test(self):
+    def test(self):
         """Echo Key Press"""
         while True:
             char = self.read_char()

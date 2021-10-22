@@ -3,7 +3,7 @@
 
 __author__ = "Jason Rebuck"
 __copyright__ = "2021"
-__version__ = "0.10"
+__version__ = "0.11"
 
 import sys
 
@@ -49,10 +49,6 @@ class Ansi:
     def goto(self, row=0, col=0):
         """Cursor to Screen Pos"""
         self._wrap(f"{row};{col}", "H")
-
-    def home(self):
-        """Place cursor at the top left"""
-        self._wrap("[", "f")
 
     def row(self, row=0):
         """Cursor to Vertical Pos"""
@@ -100,6 +96,7 @@ class Ansi:
 
     def reset(self):
         """Reset Term"""
+        #Based on how Busy Box does it.
         self._wrap("", "c", bracket="")
         self._wrap("", "B", bracket="(")
         self._wrap(0, "m")
@@ -124,7 +121,5 @@ class Ansi:
         """Restore Cursor Pos"""
         self._wrap("", "u")
 
-
 if __name__ == "__main__":
     pass
-
