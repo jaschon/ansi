@@ -8,7 +8,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "Ansi",
+    name = "ansi",
     version = ansi.__version__,
     author = ansi.__author__,
     description = (ansi.__doc__),
