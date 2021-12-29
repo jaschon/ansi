@@ -1,6 +1,11 @@
 # Ansi
 ANSI Terminal Functions
 
+## Import
+
+```
+from ansi import Ansi
+```
 
 ## Examples
 
