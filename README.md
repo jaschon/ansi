@@ -5,6 +5,7 @@ ANSI Terminal Functions
 
 ```
 from ansi import Ansi
+...
 ```
 
 ## Examples
