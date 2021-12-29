@@ -1,6 +1,13 @@
 # Ansi
 ANSI Terminal Functions
 
+## Install
+
+```
+python setup.py install
+python setup.py test
+```
+
 ## Import
 
 ```
