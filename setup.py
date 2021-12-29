@@ -2,7 +2,7 @@
 
 import os
 from setuptools import setup
-from ansi import ansi
+import ansi
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -16,4 +16,5 @@ setup(
     url = "https://github.com/jaschon/ansi",
     packages=['ansi', 'tests'],
     long_description=read('README.md'),
+    test_suite="tests", 
 )
